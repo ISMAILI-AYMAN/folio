@@ -1,4 +1,7 @@
 import streamlit as st
+from streamlit_analytics import track
+
+with track():
 
 # Page config
 st.set_page_config(page_title="Ayman Ismaili Portfolio", layout="centered")
