@@ -9,7 +9,7 @@ with track():
     col1, col2 = st.columns([2, 3])
     with col1:
         st.title("Ayman Ismaili")
-        st.markdown("**Industrial Engineering, AI & Data Science**")
+        st.title("**Industrial Engineering, AI & Data Science**")
     with col2:
         st.markdown(
             """
