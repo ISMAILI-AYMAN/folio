@@ -64,118 +64,322 @@ def ensure_list(value):
 
 
 # Page config
-st.set_page_config(page_title="Ayman Ismaili Portfolio", layout="centered")
-
-# Header with columns for name and contact info
-col1, col2 = st.columns([2, 3])
-with col1:
-    st.title("Ayman Ismaili")
-    st.title("**Industrial Engineering, AI & Data Science**")
-with col2:
-    st.markdown(
-        """
-        <div style='text-align: right'>
-        Meknès, Morocco<br>
-        ismailiayman1@gmail.com<br>
-        +212 625-778326
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-# Social links in a row
-st.markdown(
-    """
-    <div style='text-align: center'>
-    <a href='https://www.linkedin.com/in/ayman-ismaili-ml'>LinkedIn</a> | 
-    <a href='https://github.com/ISMAILI-AYMAN'>GitHub</a>
-    </div>
-    """,
-    unsafe_allow_html=True,
+st.set_page_config(
+    page_title="Ayman Ismaili Portfolio",
+    page_icon="👨‍💻",
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
-st.write("---")
-
+# Custom CSS for optimized styling
 st.markdown(
     """
     <style>
-    .section-header {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #2d3748;
-        margin: 2rem 0 1rem 0;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Global styles */
+    body {
+        background-color: #F8F9FA;
     }
+    .main {
+        font-family: 'Inter', sans-serif;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+    
+    /* Header styles */
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 3rem;
+    }
+    
+    .header-left {
+        max-width: 65%;
+    }
+    
+    .header-name {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #1a202c;
+        margin-bottom: 0.25rem;
+    }
+    
+    .header-title {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #4a5568;
+        margin-bottom: 1rem;
+    }
+
+    .header-right {
+        text-align: right;
+        font-size: 0.95rem;
+        color: #4a5568;
+        line-height: 1.6;
+    }
+    
+    .social-links {
+        margin-top: 1rem;
+        text-align: right;
+    }
+    
+    .social-link {
+        display: inline-block;
+        margin-left: 0.75rem;
+        padding: 0.5rem 1rem;
+        background: #E2E8F0;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #2d3748;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+        background: #CBD5E0;
+        transform: translateY(-2px);
+    }
+    
+    /* Section headers */
+    .section-header {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin: 4rem 0 1.5rem 0;
+        padding-bottom: 0.75rem;
+        border-bottom: 4px solid #667eea;
+    }
+    
+    /* Summary box */
+    .summary-box {
+        background: #ffffff;
+        border: 1px solid #E2E8F0;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 3rem;
+        line-height: 1.8;
+        font-size: 1.1rem;
+        color: #4a5568;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .summary-box ul {
+        padding-left: 1.25rem;
+        margin: 0;
+    }
+
+    .summary-box li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .summary-box strong {
+        color: #5a67d8;
+        font-weight: 600;
+    }
+    
+    /* Project cards */
     .project-card {
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 0.75rem;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
-        background: rgba(255,255,255,0.85);
+        background: white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        height: 100%; /* For column layout */
+        display: flex;
+        flex-direction: column;
     }
+    
+    .project-card:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        transform: translateY(-5px);
+    }
+    
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.75rem;
+    }
+
     .project-title {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         font-weight: 600;
         color: #1a202c;
     }
+    
     .project-year {
+        background: #E2E8F0;
+        color: #4a5568;
+        padding: 0.25rem 0.6rem;
+        border-radius: 16px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    .tech-badge {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        border-radius: 16px;
+        background: #edf2f7;
+        color: #4a5568;
+        font-weight: 500;
+    }
+    
+    .featured-badge {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-left: 0.5rem;
+    }
+    
+    .project-description {
+        flex-grow: 1;
+        margin: 1rem 0; 
+        padding-left: 1.25rem; 
+        line-height: 1.7; 
         color: #4a5568;
         font-size: 0.95rem;
     }
-    .tech-badge {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        margin-right: 0.4rem;
+
+    .project-description li {
         margin-bottom: 0.4rem;
-        font-size: 0.85rem;
-        border-radius: 999px;
-        background: #edf2f7;
-        color: #2d3748;
     }
-    .featured-badge {
-        display: inline-block;
-        background: linear-gradient(90deg, #667eea, #764ba2);
-        color: white;
-        font-size: 0.75rem;
-        padding: 0.2rem 0.6rem;
-        border-radius: 999px;
-        margin-left: 0.35rem;
+
+    .project-links {
+        margin-top: auto; /* Pushes links to the bottom */
     }
+
     .project-link {
         display: inline-block;
-        margin-right: 1rem;
-        color: #5a67d8;
+        margin-right: 0.75rem;
+        margin-top: 0.75rem;
+        padding: 0.5rem 1rem;
+        background: #667eea;
+        color: white;
         text-decoration: none;
         font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
     }
+    
     .project-link:hover {
-        text-decoration: underline;
+        background: #5a67d8;
+        transform: translateY(-2px);
     }
+    
+    /* Contact card */
     .contact-card {
-        border: 1px solid rgba(0,0,0,0.08);
-        border-radius: 0.75rem;
-        padding: 1.5rem;
-        background: rgba(247,250,252,0.85);
+        background: #ffffff;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .contact-item {
+        margin: 1rem 0;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+    
+    /* Footer */
+    .footer {
+        text-align: center;
+        padding: 2rem;
+        color: #718096;
+        margin-top: 4rem;
+        border-top: 1px solid #E2E8F0;
+    }
+    
+    /* Hide Streamlit default elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+        }
+        .header-left, .header-right {
+            max-width: 100%;
+            text-align: left;
+        }
+        .social-links {
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+        .social-link {
+            margin-left: 0;
+            margin-right: 0.75rem;
+        }
+        .header-name {
+            font-size: 2.5rem;
+        }
+        .project-card {
+            padding: 1.5rem;
+        }
     }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-# Professional summary
-st.header("Professional Summary")
-st.write(
+# Header Section
+st.markdown(
     """
-    Final-year engineering student at ENSAM-Meknès, specializing in AI and Data Science.
-    Experienced in building ML pipelines, deploying models, and MLOps.
-    Seeking a final-year internship (July–August 2025) in ML, MLOps, Data Engineering or Data Science.
-    Open to remote/hybrid roles worldwide.
-    """
+    <div class="header-container">
+        <div class="header-left">
+            <div class="header-name">Ayman Ismaili</div>
+            <div class="header-title">Industrial Engineering, AI & Data Science</div>
+        </div>
+        <div class="header-right">
+            <div>📍 Meknès, Morocco</div>
+            <div>✉️ ismailiayman1@gmail.com</div>
+            <div>📞 +212 625-778326</div>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/ayman-ismaili-ml" target="_blank" class="social-link">LinkedIn</a>
+                <a href="https://github.com/ISMAILI-AYMAN" target="_blank" class="social-link">GitHub</a>
+            </div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
 )
 
-st.write("---")
+# Professional Summary
+st.markdown('<div class="section-header">👨‍💼 Professional Summary</div>', unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class="summary-box">
+        <ul>
+            <li>Final-year engineering student at <strong>ENSAM-Meknès</strong>, specializing in AI and Data Science.</li>
+            <li>Experienced in building ML pipelines, deploying models, and applying MLOps principles.</li>
+            <li>Seeking a final-year internship (starting February 2026) in Machine Learning, MLOps, Data Engineering, or Data Science.</li>
+            <li>Open to remote and hybrid opportunities worldwide. 🌍</li>
+        </ul>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-# Projects
-st.header("Technical Projects")
+# Projects Section
+st.markdown('<div class="section-header">🚀 Technical Projects</div>', unsafe_allow_html=True)
 
 manual_projects = [
     {
@@ -250,85 +454,97 @@ all_projects.sort(
     reverse=True,
 )
 
-for project in all_projects:
-    featured_badge = (
-        "<span class='featured-badge'>Featured</span>"
-        if project.get("featured", False)
-        else ""
-    )
+featured_projects = [p for p in all_projects if p.get("featured")]
+other_projects = [p for p in all_projects if not p.get("featured")]
+
+
+def render_project(project):
+    """Helper function to render a project card."""
     tech_stack = "".join(
-        f"<span class='tech-badge'>{tech}</span>" for tech in ensure_list(project["tech"])
+        f"<span class='tech-badge'>{tech}</span>"
+        for tech in ensure_list(project["tech"])
+    )
+    description_html = "".join(f"<li>{desc}</li>" for desc in project["description"])
+    links_html = ""
+    if project.get("live_link"):
+        links_html += f'<a href="{project["live_link"]}" target="_blank" class="project-link">🔗 Live Demo</a>'
+    if project.get("repo_link"):
+        links_html += f'<a href="{project["repo_link"]}" target="_blank" class="project-link">📂 GitHub</a>'
+    featured_badge = (
+        "<span class='featured-badge'>Featured</span>" if project.get("featured") else ""
     )
 
-    project_html = f"""
-    <div class="project-card">
-        <div class="project-title">{project['title']} {featured_badge}</div>
-        <div class="project-year">{project.get('year', '')}</div>
-        <div style="margin: 1rem 0;">
-            {tech_stack}
+    return f"""
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-title">{project['title']} {featured_badge}</div>
+                <span class="project-year">{project.get('year', '')}</span>
+            </div>
+            <div style="margin-bottom: 1rem;">{tech_stack}</div>
+            <ul class="project-description">{description_html}</ul>
+            <div class="project-links">{links_html}</div>
         </div>
-        <ul style="margin: 1rem 0; padding-left: 1.5rem; line-height: 1.8;">
     """
 
-    for desc in project["description"]:
-        project_html += f"<li>{desc}</li>"
 
-    project_html += "</ul>"
+# Render featured projects
+for project in featured_projects:
+    st.markdown(render_project(project), unsafe_allow_html=True)
 
-    if project.get("live_link"):
-        project_html += (
-            f'<a href="{project["live_link"]}" target="_blank" class="project-link">Live Demo</a>'
-        )
-    if project.get("repo_link"):
-        project_html += (
-            f'<a href="{project["repo_link"]}" target="_blank" class="project-link">GitHub Repo</a>'
-        )
-
-    project_html += "</div>"
-
-    st.markdown(project_html, unsafe_allow_html=True)
+# Render other projects in columns
+if other_projects:
+    st.markdown(
+        '<div class="section-header" style="margin-top: 3rem;">More Projects</div>',
+        unsafe_allow_html=True,
+    )
+    num_cols = 2
+    cols = st.columns(num_cols)
+    for i, project in enumerate(other_projects):
+        with cols[i % num_cols]:
+            st.markdown(render_project(project), unsafe_allow_html=True)
 
 # Resume Section
-st.markdown('<div class="section-header">Resume</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-header">📄 Resume</div>', unsafe_allow_html=True)
 st.markdown(
     """
-    <div style="text-align: center; padding: 1rem;">
-        <p style="font-size: 1.1rem; margin-bottom: 1rem;">Download my resume to learn more about my experience and qualifications.</p>
-        <a href="./Ayman_Ismaili_Resume.pdf" download class="project-link" style="display: inline-block; text-decoration: none;">Download Resume PDF</a>
+    <div style="text-align: center; padding: 2rem; background: white; border-radius: 12px; border: 1px solid #E2E8F0; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #4a5568;">For a detailed overview of my skills and experience, please download my resume.</p>
+        <a href="./CV_ISMAILIAYMAN_DATASCIENTIST_ATS (20).pdf" download class="project-link" style="display: inline-block; text-decoration: none;">Download Resume (PDF)</a>
     </div>
-""",
+    """,
     unsafe_allow_html=True,
 )
 
-st.write("")
-
 # Contact Section
-st.markdown('<div class="section-header">Contact</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-header">📬 Contact</div>', unsafe_allow_html=True)
 st.markdown(
     """
     <div class="contact-card">
-        <h3 style="margin-top: 0; color: #2d3748;">Let's Connect!</h3>
-        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Feel free to reach out via email or LinkedIn. I'm always open to discussing new opportunities and collaborations.</p>
+        <h3 style="margin-top: 0; color: #2d3748; font-size: 1.5rem; margin-bottom: 1rem;">Let's Connect!</h3>
+        <p style="font-size: 1rem; margin-bottom: 1.5rem; color: #4a5568; line-height: 1.7;">I'm actively seeking internship opportunities and am open to collaborations. Feel free to reach out!</p>
         <div class="contact-item">
-            <strong>Email:</strong> <a href="mailto:ismailiayman1@gmail.com" style="color: #667eea; text-decoration: none;">ismailiayman1@gmail.com</a>
+            <strong>📧 Email:</strong> 
+            <a href="mailto:ismailiayman1@gmail.com" style="color: #667eea; text-decoration: none; font-weight: 500;">ismailiayman1@gmail.com</a>
         </div>
         <div class="contact-item">
-            <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ayman-ismaili-ml" target="_blank" style="color: #667eea; text-decoration: none;">linkedin.com/in/ayman-ismaili-ml</a>
+            <strong>💼 LinkedIn:</strong> 
+            <a href="https://www.linkedin.com/in/ayman-ismaili-ml" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">linkedin.com/in/ayman-ismaili-ml</a>
         </div>
         <div class="contact-item">
-            <strong>GitHub:</strong> <a href="https://github.com/ISMAILI-AYMAN" target="_blank" style="color: #667eea; text-decoration: none;">github.com/ISMAILI-AYMAN</a>
+            <strong>🐙 GitHub:</strong> 
+            <a href="https://github.com/ISMAILI-AYMAN" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">github.com/ISMAILI-AYMAN</a>
         </div>
     </div>
-""",
+    """,
     unsafe_allow_html=True,
 )
 
 # Footer
 st.markdown(
     """
-    <div style="text-align: center; padding: 2rem; color: #718096; margin-top: 3rem;">
-        <p>&copy; 2025 Ayman Ismaili. Built with Streamlit.</p>
+    <div class="footer">
+        <p style="margin: 0; font-size: 0.9rem;">&copy; 2025 Ayman Ismaili. Built with ❤️ using Streamlit.</p>
     </div>
-""",
+    """,
     unsafe_allow_html=True,
 )
